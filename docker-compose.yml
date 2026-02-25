@@ -5,9 +5,14 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
 
-    # Coolify si to routuje přes reverse proxy; expose je ideální pro interní síť.
+    # Interní síť (n8n/MindsDB v rámci stejného stacku)
     expose:
       - "8000"
+
+    # Host port pouze na localhost VPS (pro SSH tunel)
+    # VPS:127.0.0.1:3000 -> container:8000
+    ports:
+      - "127.0.0.1:3000:8000"
 
     environment:
       PYTHONUNBUFFERED: "1"

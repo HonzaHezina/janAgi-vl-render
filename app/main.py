@@ -24,13 +24,13 @@ def render_chart(
 
     Podporuje 2 režimy:
 
-    1) Přímý spec (doporučené pro tvoje flow):
+    1) Přímý spec (doporučené):
        POST /render?format=png&scale=2
        BODY: { ... Vega-Lite spec ... }
 
     2) Wrapper (zpětná kompatibilita):
        POST /render
-       BODY: { "spec": {...}, "format":"png", "scale":2, "vl_version": "5.16.3" }
+       BODY: { "spec": {...}, "format":"png", "scale":2, "vl_version": "5.x.y" }
     """
     try:
         # Wrapper režim?
