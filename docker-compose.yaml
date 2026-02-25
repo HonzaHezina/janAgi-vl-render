@@ -5,7 +5,8 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
 
-    # Interní síť (n8n/MindsDB v rámci stejného stacku)
+    # Interní síť (n8n/MindsDB v rámci stejného stacku):
+    # volej: http://vl-render:3000/...
     expose:
       - "3000"
 

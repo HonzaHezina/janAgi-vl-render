@@ -5,7 +5,7 @@ from fastapi import Body, FastAPI, HTTPException, Query
 from fastapi.responses import JSONResponse, Response
 import vl_convert as vlc
 
-app = FastAPI(title="Vega-Lite Renderer", version="1.1.0")
+app = FastAPI(title="Vega-Lite Renderer", version="1.2.0")
 
 
 @app.get("/health")
@@ -22,9 +22,7 @@ def render_chart(
 ):
     """Render Vega-Lite spec -> PNG/SVG/Vega.
 
-    Podporuje 2 režimy:
-
-    1) Přímý spec (doporučené):
+    1) Přímý spec:
        POST /render?format=png&scale=2
        BODY: { ... Vega-Lite spec ... }
 
