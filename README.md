@@ -1,11 +1,11 @@
-# janAgi-vl-render (All-on-3000) — Coolify + SSH tunel
+# janAgi-vl-render (jednotný port 31873) — Coolify + SSH tunel
 
 Renderer: **Vega-Lite spec (JSON) → PNG/SVG/Vega**.
 
-✅ Vše jede na portu **3000**:
-- **uvnitř kontejneru**: 3000
-- **interně mezi kontejnery**: `http://vl-render:3000`
-- **na VPS jen lokálně**: `http://127.0.0.1:3000` (pro SSH tunel)
+✅ Vše běží na portu **31873**:
+- **uvnitř kontejneru**: 31873
+- **interně mezi kontejnery**: `http://vl-render:31873`
+- **na VPS jen lokálně**: `http://127.0.0.1:31873` (pro SSH tunel)
 
 ## Endpoints
 - `GET /health` → `{"ok": true}`
@@ -13,25 +13,25 @@ Renderer: **Vega-Lite spec (JSON) → PNG/SVG/Vega**.
 
 ## Ověření na VPS
 ```bash
-curl http://127.0.0.1:3000/health
+curl http://127.0.0.1:31873/health
 ```
 
 ## SSH tunel z PC
 Jednorázově:
 ```bash
-ssh -N -L 3000:127.0.0.1:3000 root@TVE_VPS_IP
+ssh -N -L 31873:127.0.0.1:31873 root@TVE_VPS_IP
 ```
 
 Potom na PC:
-- `http://127.0.0.1:3000/health`
+- `http://127.0.0.1:31873/health`
 
 ## Interní volání (n8n ve stejném stacku/síti)
-- `http://vl-render:3000/health`
-- `http://vl-render:3000/render`
+- `http://vl-render:31873/health`
+- `http://vl-render:31873/render`
 
 ## Render – doporučené volání (pošli přímo Vega-Lite spec)
 ```bash
-curl -X POST "http://127.0.0.1:3000/render?format=png&scale=2" \
+curl -X POST "http://127.0.0.1:31873/render?format=png&scale=2" \
   -H "Content-Type: application/json" \
   -d '{
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
@@ -46,7 +46,7 @@ curl -X POST "http://127.0.0.1:3000/render?format=png&scale=2" \
 
 ## Wrapper (zpětná kompatibilita)
 ```bash
-curl -X POST "http://127.0.0.1:3000/render" \
+curl -X POST "http://127.0.0.1:31873/render" \
   -H "Content-Type: application/json" \
   -d '{
     "format": "png",
@@ -62,7 +62,3 @@ curl -X POST "http://127.0.0.1:3000/render" \
     }
   }' --output chart.png
 ```
-
-## Poznámky
-- Doporučuju posílat data jako `data.values` (ne `data.url`) – bezpečnější a deterministické.
-- Pokud budeš renderovat hodně bodů, SVG bývá rychlejší než PNG.

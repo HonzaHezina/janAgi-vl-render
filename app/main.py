@@ -5,7 +5,7 @@ from fastapi import Body, FastAPI, HTTPException, Query
 from fastapi.responses import JSONResponse, Response
 import vl_convert as vlc
 
-app = FastAPI(title="Vega-Lite Renderer", version="1.2.0")
+app = FastAPI(title="Vega-Lite Renderer", version="1.3.0")
 
 
 @app.get("/health")

@@ -12,7 +12,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app ./app
 
-EXPOSE 3000
+EXPOSE 31873
 
 # Uvicorn běží na 0.0.0.0, aby byl dostupný z container sítě i přes proxy.
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "3000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "31873"]
