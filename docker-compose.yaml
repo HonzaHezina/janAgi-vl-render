@@ -7,19 +7,19 @@ services:
 
     # Interní síť (n8n/MindsDB v rámci stejného stacku)
     expose:
-      - "8000"
+      - "3000"
 
     # Host port pouze na localhost VPS (pro SSH tunel)
-    # VPS:127.0.0.1:3000 -> container:8000
+    # VPS:127.0.0.1:3000 -> container:3000
     ports:
-      - "127.0.0.1:3000:8000"
+      - "127.0.0.1:3000:3000"
 
     environment:
       PYTHONUNBUFFERED: "1"
 
     # Healthcheck bez curl/wget (využije python v image)
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health').read()"]
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:3000/health').read()"]
       interval: 10s
       timeout: 3s
       retries: 10
